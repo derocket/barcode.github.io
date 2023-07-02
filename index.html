@@ -75,6 +75,17 @@
   </div>
 
   <script>
+    document.addEventListener("DOMContentLoaded", function() {
+      var lastEnteredText = localStorage.getItem("lastEnteredText");
+      var lastGeneratedBarcode = localStorage.getItem("lastGeneratedBarcode");
+      if (lastEnteredText) {
+        document.getElementById("text-input").value = lastEnteredText;
+      }
+      if (lastGeneratedBarcode) {
+        document.getElementById("barcode").innerHTML = lastGeneratedBarcode;
+      }
+    });
+
     function generateBarcode() {
       var text = document.getElementById("text-input").value;
       if (text === "") {
@@ -88,6 +99,9 @@
         fontSize: 20,
         margin: 10,
       });
+
+      localStorage.setItem("lastEnteredText", text);
+      localStorage.setItem("lastGeneratedBarcode", document.getElementById("barcode").innerHTML);
     }
   </script>
 </body>
